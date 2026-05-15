@@ -152,8 +152,7 @@ let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{}
 
 async function api(prompt) {
   const GEMINI_API_KEY = "AIzaSyAZSKVOHYrEQDhVXiaFvMU6mnbIkUIAWzU";
-  const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-  try {
+  const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;  try {
     const response = await fetch(URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
