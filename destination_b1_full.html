@@ -173,7 +173,7 @@ async function api(prompt) {
 }
 
 async function genQuiz(u) {
-  return api(`Bạn là giáo viên tiếng Anh. Tạo 5 câu hỏi quiz từ vựng cho Unit "${u.id}: ${u.voc}" sách Destination B1.
+  return api(`Bạn là giáo viên tiếng Anh. Tạo 10 câu hỏi quiz từ vựng cho Unit "${u.id}: ${u.voc}" sách Destination B1.
 Dùng các từ này: ${u.vocWords}
 Câu hỏi đa dạng: nghĩa tiếng Việt của từ tiếng Anh, hoặc ngược lại, hoặc điền từ vào câu ví dụ.
 Mỗi câu: 4 đáp án (1 đúng, 3 sai nhưng liên quan chủ đề).
