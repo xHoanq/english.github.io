@@ -152,7 +152,10 @@ let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{}
 
 async function api(prompt) {
   const GEMINI_API_KEY = "AIzaSyAZSKVOHYrEQDhVXiaFvMU6mnbIkUIAWzU";
-  const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;  try {
+  // Sử dụng v1 để ổn định nhất, hoặc v1beta với cấu trúc đường dẫn mới
+  const URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+  
+  try {
     const response = await fetch(URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -160,13 +163,20 @@ async function api(prompt) {
         contents: [{ parts: [{ text: prompt }] }]
       })
     });
+
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error?.message || 'Lỗi kết nối API');
+    if (!response.ok) {
+        // Log chi tiết lỗi để bạn dễ debug
+        console.error("Chi tiết lỗi từ Google:", data);
+        throw new Error(data.error?.message || 'Lỗi kết nối API');
+    }
+
     const resultText = data.candidates[0].content.parts[0].text;
+    // Làm sạch Markdown nếu AI trả về code block ```json
     const cleanedJson = resultText.replace(/```json\n?/g, '').replace(/```/g, '').trim();
     return JSON.parse(cleanedJson);
   } catch (error) {
-    console.error("Lỗi AI:", error);
+    console.error("Lỗi hệ thống:", error);
     throw error;
   }
 }
