@@ -151,16 +151,21 @@ const UNITS = [
 let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{},esubmit:false,pd:null,pans:{},psubmit:false,pact:null,loading:false,err:null};
 
 async function api(prompt) {
-  // Lấy key từ bộ nhớ trình duyệt để tránh lộ trên Github
+  // 1. Tự động lấy Key đã lưu trong trình duyệt của bạn ra dùng
   let KEY = localStorage.getItem('gemini_key');
 
+  // 2. Nếu chưa có Key, trang web sẽ hiện một ô thông báo nhỏ để bạn nhập vào
   if (!KEY || KEY.length < 10) {
-    KEY = prompt("Vui lòng dán Gemini API Key mới của bạn vào đây:");
-    if (KEY) localStorage.setItem('gemini_key', KEY);
-    else return;
+    KEY = prompt("Vui lòng nhập/dán Gemini API Key mới của bạn vào đây:");
+    if (KEY) {
+      localStorage.setItem('gemini_key', KEY.trim());
+    } else {
+      alert("Bạn cần nhập API Key để ứng dụng có thể tạo câu hỏi!");
+      return null;
+    }
   }
 
-  // URL chuẩn cho model gemini-1.5-flash
+  // URL kết nối chuẩn tới Google Gemini phiên bản ổn định nhất
   const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${KEY}`;
 
   try {
@@ -174,19 +179,20 @@ async function api(prompt) {
 
     const data = await response.json();
 
+    // Nếu Key bị lỗi (403 hoặc 401), xóa Key lỗi đó đi để bạn nhập lại Key mới
     if (!response.ok) {
       if (response.status === 403 || response.status === 401) {
-        localStorage.removeItem('gemini_key'); // Xóa key lỗi để người dùng nhập lại
-        throw new Error("API Key của bạn đã bị khóa hoặc hết hạn. Vui lòng tải lại trang và nhập Key mới.");
+        localStorage.removeItem('gemini_key');
+        throw new Error("API Key của bạn đã bị Google khóa hoặc không hợp lệ. Vui lòng F5 tải lại trang để nhập Key mới!");
       }
-      throw new Error(data.error?.message || "Lỗi API");
+      throw new Error(data.error?.message || "Lỗi kết nối API");
     }
 
     const resultText = data.candidates[0].content.parts[0].text;
     const cleanedJson = resultText.replace(/```json\n?/g, '').replace(/```/g, '').trim();
     return JSON.parse(cleanedJson);
   } catch (error) {
-    console.error("Lỗi:", error);
+    console.error("Lỗi hệ thống:", error);
     alert("⚠️ " + error.message);
     throw error;
   }
