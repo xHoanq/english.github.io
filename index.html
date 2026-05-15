@@ -150,22 +150,28 @@ const UNITS = [
 
 let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{},esubmit:false,pd:null,pans:{},psubmit:false,pact:null,loading:false,err:null};
 
-async function api(prompt) {
-  // 1. Tự động lấy Key đã lưu trong trình duyệt của bạn ra dùng
+async function api(promptText) {
+  // 1. Lấy key từ trình duyệt ra kiểm tra
   let KEY = localStorage.getItem('gemini_key');
 
-  // 2. Nếu chưa có Key, trang web sẽ hiện một ô thông báo nhỏ để bạn nhập vào
-  if (!KEY || KEY.length < 10) {
-    KEY = prompt("Vui lòng nhập/dán Gemini API Key mới của bạn vào đây:");
-    if (KEY) {
-      localStorage.setItem('gemini_key', KEY.trim());
+  // 2. Nếu chưa có Key hoặc Key nhập sai định dạng (không bắt đầu bằng AIzaSy)
+  if (!KEY || !KEY.trim().startsWith("AIzaSy")) {
+    // Xóa key lỗi cũ trong bộ nhớ (nếu có)
+    localStorage.removeItem('gemini_key');
+    
+    // Hiện ô bắt buộc nhập
+    let inputKey = prompt("⚠️ HỆ THỐNG CẦN API KEY ĐỂ HOẠT ĐỘNG:\nVui lòng dán Gemini API Key của bạn vào đây (Key chuẩn bắt đầu bằng 'AIzaSy'):");
+    
+    if (inputKey && inputKey.trim().startsWith("AIzaSy")) {
+      KEY = inputKey.trim();
+      localStorage.setItem('gemini_key', KEY);
     } else {
-      alert("Bạn cần nhập API Key để ứng dụng có thể tạo câu hỏi!");
+      alert("❌ API Key không hợp lệ hoặc bạn đã hủy nhập!\nỨng dụng không thể tạo câu hỏi nếu thiếu Key.");
       return null;
     }
   }
 
-  // URL kết nối chuẩn tới Google Gemini phiên bản ổn định nhất
+  // URL kết nối chuẩn phiên bản v1beta
   const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${KEY}`;
 
   try {
@@ -173,19 +179,19 @@ async function api(prompt) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
+        contents: [{ parts: [{ text: promptText }] }]
       })
     });
 
     const data = await response.json();
 
-    // Nếu Key bị lỗi (403 hoặc 401), xóa Key lỗi đó đi để bạn nhập lại Key mới
     if (!response.ok) {
+      // Nếu Key bị Google từ chối (403/401), xóa luôn để lần sau tải lại trang sẽ hiện ô nhập mới
       if (response.status === 403 || response.status === 401) {
         localStorage.removeItem('gemini_key');
-        throw new Error("API Key của bạn đã bị Google khóa hoặc không hợp lệ. Vui lòng F5 tải lại trang để nhập Key mới!");
+        throw new Error("API Key của bạn đã bị Google khóa hoặc sai. Hãy tải lại trang (F5) để nhập Key mới!");
       }
-      throw new Error(data.error?.message || "Lỗi kết nối API");
+      throw new Error(data.error?.message || "Lỗi kết nối hệ thống");
     }
 
     const resultText = data.candidates[0].content.parts[0].text;
@@ -196,7 +202,6 @@ async function api(prompt) {
     alert("⚠️ " + error.message);
     throw error;
   }
-}
 
 async function genQuiz(u) {
   return api(`Bạn là giáo viên tiếng Anh. Tạo 10 câu hỏi quiz từ vựng cho Unit "${u.id}: ${u.voc}" sách Destination B1.
