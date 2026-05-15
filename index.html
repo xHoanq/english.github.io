@@ -151,40 +151,43 @@ const UNITS = [
 let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{},esubmit:false,pd:null,pans:{},psubmit:false,pact:null,loading:false,err:null};
 
 async function api(prompt) {
-  const GEMINI_API_KEY = "AIzaSyAZSKVOHYrEQDhVXiaFvMU6mnbIkUIAWzU";
-  // Sửa 1: Chuyển sang v1 để ổn định và tìm thấy model
-  const URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-  
+  // Lấy key từ bộ nhớ trình duyệt để tránh lộ trên Github
+  let KEY = localStorage.getItem('gemini_key');
+
+  if (!KEY || KEY.length < 10) {
+    KEY = prompt("Vui lòng dán Gemini API Key mới của bạn vào đây:");
+    if (KEY) localStorage.setItem('gemini_key', KEY);
+    else return;
+  }
+
+  // URL chuẩn cho model gemini-1.5-flash
+  const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${KEY}`;
+
   try {
     const response = await fetch(URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // Sửa 2: Đảm bảo cấu trúc body đúng chuẩn Google AI
       body: JSON.stringify({
-        contents: [{
-          parts: [{ text: prompt }]
-        }]
+        contents: [{ parts: [{ text: prompt }] }]
       })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Chi tiết lỗi:", data);
-      throw new Error(data.error?.message || 'Lỗi kết nối API');
-    }
-
-    // Sửa 3: Kiểm tra dữ liệu trả về trước khi xử lý
-    if (!data.candidates || !data.candidates[0].content) {
-      throw new Error("AI không trả về nội dung hợp lệ.");
+      if (response.status === 403 || response.status === 401) {
+        localStorage.removeItem('gemini_key'); // Xóa key lỗi để người dùng nhập lại
+        throw new Error("API Key của bạn đã bị khóa hoặc hết hạn. Vui lòng tải lại trang và nhập Key mới.");
+      }
+      throw new Error(data.error?.message || "Lỗi API");
     }
 
     const resultText = data.candidates[0].content.parts[0].text;
-    // Làm sạch Markdown JSON
     const cleanedJson = resultText.replace(/```json\n?/g, '').replace(/```/g, '').trim();
     return JSON.parse(cleanedJson);
   } catch (error) {
-    console.error("Lỗi hệ thống:", error);
+    console.error("Lỗi:", error);
+    alert("⚠️ " + error.message);
     throw error;
   }
 }
