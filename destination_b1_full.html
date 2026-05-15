@@ -151,14 +151,25 @@ const UNITS = [
 let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{},esubmit:false,pd:null,pans:{},psubmit:false,pact:null,loading:false,err:null};
 
 async function api(prompt) {
-  const r = await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})
-  });
-  const d = await r.json();
-  if(!r.ok) throw new Error(d.error?.message||'Lỗi API');
-  const t = d.content.map(i=>i.text||"").join("");
-  return JSON.parse(t.replace(/```json\n?/g,'').replace(/```/g,'').trim());
+  const GEMINI_API_KEY = "AIzaSyAZSKVOHYrEQDhVXiaFvMU6mnbIkUIAWzU";
+  const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+  try {
+    const response = await fetch(URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error?.message || 'Lỗi kết nối API');
+    const resultText = data.candidates[0].content.parts[0].text;
+    const cleanedJson = resultText.replace(/```json\n?/g, '').replace(/```/g, '').trim();
+    return JSON.parse(cleanedJson);
+  } catch (error) {
+    console.error("Lỗi AI:", error);
+    throw error;
+  }
 }
 
 async function genQuiz(u) {
