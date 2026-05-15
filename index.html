@@ -1,177 +1,198 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&display=swap\" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--p:#2563eb;--pl:#dbeafe;--pd:#1d4ed8;--s:#16a34a;--sl:#dcfce7;--w:#d97706;--wl:#fef3c7;--d:#dc2626;--dl:#fee2e2;--bg:#eef2ff;--sur:#fff;--sur2:#f8fafc;--t:#1e293b;--t2:#64748b;--t3:#94a3b8;--bd:#e2e8f0;--r:12px;--rs:8px}
 body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
 .app{max-width:980px;margin:0 auto;padding:16px}
-.hdr{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);border-radius:18px;padding:22px 24px;margin-bottom:18px;color:#fff;display:flex;align-items:center;gap:16px;box-shadow:0 4px 24px rgba(37,99,235,.25)}
-.hdr-icon{font-size:44px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.2))}
-.hdr h1{font-family:'Nunito',sans-serif;font-size:21px;font-weight:900;margin-bottom:3px}
-.hdr p{font-size:13px;opacity:.85}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
-.ucard{background:var(--sur);border:2px solid var(--bd);border-radius:var(--r);padding:13px 11px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.ucard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--p),#60a5fa);opacity:0;transition:.2s}
-.ucard:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:0 6px 18px rgba(37,99,235,.14)}
-.ucard:hover::before{opacity:1}
-.unum{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--p);line-height:1}
-.uvoc{font-size:11px;color:var(--t2);margin-top:5px;line-height:1.35;font-weight:600}
-.ugram{font-size:10px;color:var(--t3);margin-top:3px;line-height:1.3;font-style:italic}
-.uv{background:var(--sur);border-radius:var(--r);border:2px solid var(--bd);padding:20px}
-.uhdr{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--bd)}
-.bbtn{background:var(--sur2);border:2px solid var(--bd);border-radius:var(--rs);padding:8px 14px;cursor:pointer;font-size:13px;font-weight:700;color:var(--t2);transition:.2s;white-space:nowrap}
-.bbtn:hover{border-color:var(--p);color:var(--p)}
-.uinfo h2{font-family:'Nunito',sans-serif;font-size:19px;font-weight:900;color:var(--p)}
-.uinfo .voc-sub{font-size:13px;color:var(--t2);font-weight:600;margin-top:2px}
-.uinfo .gram-sub{font-size:12px;color:var(--t3);font-style:italic;margin-top:1px}
-.ftabs{display:flex;gap:8px;margin-bottom:18px}
-.ftab{flex:1;padding:10px 6px;border:2px solid var(--bd);border-radius:var(--rs);cursor:pointer;text-align:center;font-size:12px;font-weight:700;color:var(--t2);transition:.2s;background:var(--sur2)}
-.ftab.on{background:var(--p);border-color:var(--p);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
-.ftab:hover:not(.on){border-color:var(--p);color:var(--p)}
-.ficon{font-size:18px;display:block;margin-bottom:3px}
-.gbtn{width:100%;padding:13px;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.gbtn:hover{opacity:.92;transform:translateY(-1px)}
-.gbtn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-.empty-state{text-align:center;padding:30px 20px}
-.empty-state .es-icon{font-size:52px;margin-bottom:12px}
-.empty-state h3{font-size:15px;font-weight:700;margin-bottom:6px}
-.empty-state p{font-size:13px;color:var(--t2);margin-bottom:18px;line-height:1.5}
-.ld{text-align:center;padding:40px}
-.spin{width:36px;height:36px;border:3px solid var(--bd);border-top-color:var(--p);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 12px}
-@keyframes sp{to{transform:rotate(360deg)}}
-.ld p{font-size:13px;color:var(--t2);font-weight:600}
-.qq{background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:var(--r);padding:16px;margin-bottom:14px;font-size:15px;font-weight:700;color:#1e3a8a;line-height:1.6;border-left:4px solid var(--p)}
-.opts{display:grid;gap:9px}
-.opt{padding:12px 14px;border:2px solid var(--bd);border-radius:var(--rs);cursor:pointer;font-size:14px;font-weight:500;transition:.2s;background:var(--sur);display:flex;align-items:center;gap:10px}
-.opt:hover:not(.dis){border-color:var(--p);background:var(--pl)}
-.opt.ok{border-color:var(--s);background:var(--sl);color:#14532d;font-weight:600}
-.opt.ng{border-color:var(--d);background:var(--dl);color:#7f1d1d}
-.opt.dis{cursor:default}
-.olet{width:28px;height:28px;border-radius:50%;background:var(--bd);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
-.opt.ok .olet{background:var(--s);color:#fff}
-.opt.ng .olet{background:var(--d);color:#fff}
-.expl{margin-top:12px;padding:13px;background:#f0fdf4;border-radius:var(--rs);border-left:4px solid var(--s);font-size:13px;color:#166534;line-height:1.6}
-.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
-.nbtn{padding:8px 18px;border-radius:var(--rs);border:2px solid var(--p);background:var(--sur);color:var(--p);font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
-.nbtn:hover:not(:disabled){background:var(--p);color:#fff}
-.nbtn:disabled{opacity:.35;cursor:not-allowed}
-.qct{font-size:13px;color:var(--t2);font-weight:600}
-.eq{background:var(--sur);border:2px solid var(--bd);border-radius:var(--r);padding:15px;margin-bottom:11px}
-.eqn{font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;margin-bottom:7px}
-.eqt{font-size:14px;font-weight:600;margin-bottom:11px;line-height:1.6;color:var(--t)}
-.eo{padding:10px 13px;border:2px solid var(--bd);border-radius:var(--rs);cursor:pointer;font-size:13px;transition:.2s;display:flex;align-items:center;gap:8px;margin-bottom:7px;font-weight:500}
-.eo:last-child{margin-bottom:0}
-.eo:hover:not(.dis){border-color:var(--p);background:var(--pl)}
-.eo.sel{border-color:var(--p);background:var(--pl);font-weight:600}
-.eo.ok{border-color:var(--s);background:var(--sl);color:#14532d}
-.eo.ng{border-color:var(--d);background:var(--dl);color:#7f1d1d}
-.eo.dis{cursor:default}
-.esub{margin-top:14px;padding:12px 20px;background:var(--p);color:#fff;border:none;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;width:100%;transition:.2s}
-.esub:hover{background:var(--pd)}
-.esub:disabled{opacity:.5;cursor:not-allowed}
-.sc{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border-radius:var(--r);padding:20px;text-align:center;margin-bottom:14px}
-.sb{font-size:48px;font-weight:900;font-family:'Nunito',sans-serif}
-.sl2{font-size:14px;opacity:.85;margin-top:4px;font-weight:600}
-.pbox{background:#f8fafc;border:2px solid var(--bd);border-radius:var(--r);padding:18px;margin-bottom:14px;font-size:14px;line-height:2.2}
-.blk{display:inline-block;min-width:90px;border-bottom:2px solid var(--p);margin:0 3px;text-align:center;cursor:pointer;font-weight:700;color:var(--p);padding:1px 8px;background:var(--pl);border-radius:4px 4px 0 0;transition:.15s}
-.blk:hover{background:#bfdbfe}
-.blk.act{outline:2px solid var(--p);outline-offset:2px}
-.blk.ok2{background:var(--sl);border-color:var(--s);color:#14532d}
-.blk.ng2{background:var(--dl);border-color:var(--d);color:#7f1d1d}
-.wbank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.wchip{padding:6px 14px;border:2px solid var(--bd);border-radius:20px;cursor:pointer;font-size:13px;font-weight:600;background:var(--sur);transition:.2s;color:var(--t)}
-.wchip:hover:not(.used){border-color:var(--p);color:var(--p);background:var(--pl)}
-.wchip.sel{border-color:var(--p);background:var(--p);color:#fff}
-.wchip.used{opacity:.35;cursor:default}
-.psub{padding:11px 22px;background:var(--s);color:#fff;border:none;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;transition:.2s}
-.psub:hover{background:#15803d}
-.ans-sec{margin-top:14px;padding:14px;background:var(--sur2);border-radius:var(--r);border:2px solid var(--bd)}
-.ans-sec h4{font-size:13px;font-weight:700;margin-bottom:9px;color:var(--t);text-transform:uppercase;letter-spacing:.4px}
-.ai{display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 0}
-.err{background:var(--dl);border:2px solid var(--d);border-radius:var(--r);padding:14px;font-size:13px;color:var(--d);font-weight:600}
-.rbtn{padding:9px 18px;background:var(--sur);border:2px solid var(--d);color:var(--d);border-radius:var(--rs);font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;transition:.2s}
-.rbtn:hover{background:var(--d);color:#fff}
-.stitle{font-size:11px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
-.hint{background:var(--wl);border-radius:var(--rs);padding:8px 12px;font-size:12px;color:#92400e;font-weight:600;margin-bottom:12px}
+.hdr{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:24px;border-radius:var(--r);margin-bottom:20px;box-shadow:0 10px 15px -3px rgba(37,99,235,0.2)}
+.hdr h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:28px;margin-bottom:6px;letter-spacing:-0.5px}
+.hdr p{opacity:0.9;font-size:14px}
+
+/* Giao diện ô nhập API Key mới xịn hơn */
+.key-box {
+  background: var(--sur);
+  border: 2px dashed var(--p);
+  padding: 16px;
+  border-radius: var(--r);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.key-box input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--bd);
+  border-radius: var(--rs);
+  font-family: monospace;
+  font-size: 14px;
+}
+.key-box button {
+  padding: 10px 16px;
+  background: var(--p);
+  color: white;
+  border: none;
+  border-radius: var(--rs);
+  cursor: pointer;
+  font-weight: 600;
+}
+.key-box button:hover { background: var(--pd); }
+
+.grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+.lst{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);padding:12px;max-height:calc(100vh - 120px);overflow-y:auto}
+.lst-h{font-size:12px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;padding:8px;margin-bottom:4px}
+.uitem{display:flex;align-items:center;padding:10px 12px;border-radius:var(--rs);cursor:pointer;transition:all 0.2s;margin-bottom:4px}
+.uitem:hover{background:var(--sur2)}
+.uitem.act{background:var(--pl);color:var(--pd);font-weight:600}
+.uitem-id{font-family:'Nunito',sans-serif;font-weight:800;width:28px;font-size:14px}
+.uitem-body{flex:1;min-width:0}
+.uitem-t{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uitem-g{font-size:11px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uitem.act .uitem-g{color:var(--p)}
+.main-c{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);padding:24px;min-height:400px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--t2);padding:40px 0}
+.welcome h2{font-family:'Nunito',sans-serif;color:var(--t);margin-bottom:10px}
+.utabs{display:flex;gap:8px;border-bottom:2px solid var(--bd);margin-bottom:20px}
+.utab{padding:10px 16px;cursor:pointer;font-weight:600;font-size:14px;color:var(--t2);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+.utab:hover{color:var(--t)}
+.utab.act{color:var(--p);border-bottom-color:var(--p)}
+.uhead{margin-bottom:20px}
+.uhead h2{font-family:'Nunito',sans-serif;font-weight:800;font-size:22px;margin-bottom:4px}
+.uhead p{color:var(--t2);font-size:14px}
+.action-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;border:2px dashed var(--bd);border-radius:var(--r);background:var(--sur2);text-align:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--p);color:#fff;border:none;border-radius:var(--rs);font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 6px -1px rgba(37,99,235,0.2)}
+.btn:hover{background:var(--pd);transform:translateY(-1px)}
+.btn:disabled{background:var(--t3);cursor:not-allowed;transform:none;box-shadow:none}
+.loading{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--t2);font-size:14px}
+.spinner{width:32px;height:32px;border:3px solid var(--pl);border-top-color:var(--p);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.qbox{margin-bottom:24px}
+.qtext{font-size:16px;font-weight:600;margin-bottom:12px;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{padding:12px 16px;background:var(--sur2);border:1px solid var(--bd);border-radius:var(--rs);cursor:pointer;transition:all 0.2s;font-size:14px;display:flex;align-items:center;gap:10px}
+.opt:hover{background:var(--pl);border-color:var(--p)}
+.opt.sel{background:var(--pl);border-color:var(--p);font-weight:600;color:var(--pd)}
+.opt.ok{background:var(--sl);border-color:var(--s);color:var(--s);font-weight:600}
+.opt.err{background:var(--dl);border-color:var(--d);color:var(--d);font-weight:600}
+.expl{margin-top:12px;padding:12px;background:var(--wl);border-left:4px solid var(--w);border-radius:0 var(--rs) var(--rs) 0;font-size:13px;color:var(--w);line-height:1.5}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--bd)}
+.btn-s{padding:8px 16px;font-size:13px;background:var(--sur2);color:var(--t);border:1px solid var(--bd);box-shadow:none}
+.btn-s:hover{background:var(--bd)}
+.sc{padding:20px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border-radius:var(--r);text-align:center;margin-bottom:20px}
+.sb{font-family:'Nunito',sans-serif;font-weight:900;font-size:24px;margin-bottom:4px}
+.wlist{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.wchip{padding:8px 14px;background:var(--sur2);border:1px solid var(--bd);border-radius:20px;font-size:13px;cursor:pointer;user-select:none;transition:all 0.15s}
+.wchip:hover{border-color:var(--p);color:var(--p)}
+.wchip.used{opacity:0.4;background:var(--bd);cursor:not-allowed}
+.ptext{font-size:16px;line-height:1.8;letter-spacing:0.3px;margin-bottom:24px}
+.blk{display:inline-block;min-width:80px;padding:2px 8px;border-bottom:2px dashed var(--t2);text-align:center;font-weight:700;color:var(--p);cursor:pointer;margin:0 4px}
+.blk.act{border-bottom-style:solid;border-bottom-color:var(--p);background:var(--pl)}
+.blk.filled{border-bottom-style:solid;border-bottom-color:var(--s);color:var(--s)}
 </style>
 </head>
 <body>
-<div class="app" id="root"></div>
+<div class="app">
+  <div class="hdr">
+    <h1>Destination B1 Quest Master</h1>
+    <p>Hệ thống tự động hóa bài tập thông minh dựa trên giáo trình chuẩn</p>
+  </div>
+
+  <div class="key-box">
+    <span>🔑 Gemini API Key:</span>
+    <input type="password" id="apiKeyInput" placeholder="Dán mã AIzaSy... của bạn vào đây" />
+    <button onclick="saveKey()">Lưu Key</button>
+  </div>
+
+  <div class="grid">
+    <div class="lst" id="ulist"></div>
+    <div class="main-c" id="view"></div>
+  </div>
+</div>
+
 <script>
+// KHAI BÁO DỮ LIỆU SÁCH DESTINATION B1
 const UNITS = [
-  {id:1, voc:"People & Personality", gram:"Present simple / be", vocWords:"confident, shy, generous, ambitious, reliable, stubborn, cheerful, arrogant, patient, honest, jealous, curious, friendly, independent, polite", gramNote:"Affirmative, negative, question forms of present simple and be"},
-  {id:2, voc:"Learning & Education", gram:"Present continuous", vocWords:"education, knowledge, skill, practice, revise, concentrate, achieve, progress, degree, qualification, lecture, assignment, research, scholarship, certificate", gramNote:"Present continuous for now and around now; state verbs"},
-  {id:3, voc:"Travel & Transport", gram:"Past simple", vocWords:"journey, destination, departure, arrival, luggage, vehicle, passport, border, fare, sightseeing, itinerary, accommodation, delay, connection, cruise", gramNote:"Regular and irregular past simple; questions and negatives"},
-  {id:4, voc:"Health & the Body", gram:"Past continuous", vocWords:"symptom, treatment, recover, injury, prescription, surgery, medicine, exercise, diet, pulse, immune, ache, cure, physical, mental", gramNote:"Past continuous; past simple vs past continuous"},
-  {id:5, voc:"Food & Cooking", gram:"Present perfect simple", vocWords:"ingredient, recipe, flavour, cuisine, nutrition, protein, portion, spice, appetizer, dessert, chef, raw, seasoning, roast, simmer", gramNote:"Present perfect with ever/never/already/yet/just"},
-  {id:6, voc:"Work & Jobs", gram:"Present perfect continuous", vocWords:"salary, promotion, career, employer, employee, colleague, resign, occupation, retire, freelance, deadline, interview, contract, profession, responsibility", gramNote:"Present perfect continuous; how long, since, for"},
-  {id:7, voc:"Home & Furniture", gram:"Comparatives & Superlatives", vocWords:"comfortable, spacious, furniture, appliance, decorate, rent, suburb, landlord, storage, ceiling, balcony, renovate, terraced, detached, neighbourhood", gramNote:"Comparative and superlative adjectives and adverbs"},
-  {id:8, voc:"Entertainment & Leisure", gram:"Will & going to", vocWords:"performance, entertainment, audience, theatre, exhibit, leisure, recreation, concert, festival, plot, director, critic, preview, collection, hobby", gramNote:"Will for decisions/offers/predictions; going to for plans"},
-  {id:9, voc:"Nature & Environment", gram:"First conditional", vocWords:"habitat, endangered, pollution, recycle, climate, species, deforestation, renewable, ecosystem, drought, conservation, wildlife, atmosphere, fossil, glacier", gramNote:"If + present simple, will + infinitive"},
-  {id:10, voc:"Science & Technology", gram:"Second conditional", vocWords:"invention, experiment, laboratory, software, digital, artificial, discovery, innovation, data, robot, satellite, wireless, protein, analysis, hypothesis", gramNote:"If + past simple, would + infinitive; wish + past"},
-  {id:11, voc:"Shopping & Money", gram:"Third conditional", vocWords:"purchase, bargain, discount, receipt, currency, budget, expense, refund, transaction, luxury, consumer, credit, investment, afford, wholesale", gramNote:"If + past perfect, would have + past participle"},
-  {id:12, voc:"Feelings & Emotions", gram:"Modals – ability & permission", vocWords:"anxious, relieved, thrilled, ashamed, jealous, furious, terrified, overwhelmed, content, disgusted, nostalgic, sympathetic, offended, enthusiastic, embarrassed", gramNote:"Can, could, be able to; may, might, be allowed to"},
-  {id:13, voc:"Society & Community", gram:"Modals – obligation & advice", vocWords:"community, volunteer, charity, tradition, custom, equality, discrimination, multicultural, welfare, poverty, protest, democracy, generation, citizen, authority", gramNote:"Must, have to, should, ought to, needn't, mustn't"},
-  {id:14, voc:"Sport & Fitness", gram:"Passive voice – present & past", vocWords:"athlete, champion, tournament, compete, stamina, fitness, referee, tactics, discipline, sprint, agility, penalty, spectator, coach, medal", gramNote:"Present simple passive; past simple passive"},
-  {id:15, voc:"Appearance & Fashion", gram:"Passive voice – other tenses", vocWords:"stylish, elegant, casual, designer, fabric, pattern, accessory, trendy, outfit, jewellery, wardrobe, striped, sleeve, collar, heel", gramNote:"Future passive; present perfect passive; modal passive"},
-  {id:16, voc:"Communication & Media", gram:"Reported speech – statements", vocWords:"broadcast, journalist, headline, interview, publish, editorial, viewer, correspondent, documentary, source, censorship, digital, podcast, caption, clickbait", gramNote:"Say/tell; tense changes in reported speech"},
-  {id:17, voc:"Crime & Justice", gram:"Reported speech – questions & commands", vocWords:"suspect, evidence, witness, verdict, sentence, guilt, punishment, criminal, victim, investigation, arrest, prosecutor, bail, custody, offence", gramNote:"Ask/wonder for questions; tell/order for commands"},
-  {id:18, voc:"Art & Culture", gram:"Gerunds & infinitives 1", vocWords:"sculpture, gallery, portrait, exhibition, manuscript, masterpiece, critic, abstract, Renaissance, classical, mural, installation, patron, ceramic, canvas", gramNote:"Verbs followed by gerund or infinitive (like, enjoy, want, hope)"},
-  {id:19, voc:"Business & Economy", gram:"Gerunds & infinitives 2", vocWords:"revenue, profit, market, export, import, competition, entrepreneur, investment, recession, inflation, corporation, surplus, merger, stakeholder, dividend", gramNote:"Gerund as subject; infinitive of purpose; verb + object + infinitive"},
-  {id:20, voc:"The Mind & Brain", gram:"Articles", vocWords:"memory, perception, consciousness, intelligence, subconscious, motivation, cognitive, neuron, instinct, emotion, phobia, meditation, concentration, hallucination, personality", gramNote:"A/an, the; zero article with generalizations, proper nouns"},
-  {id:21, voc:"Language & Linguistics", gram:"Quantifiers", vocWords:"vocabulary, grammar, dialect, fluency, bilingual, accent, idiom, syntax, linguistics, translate, phrase, syllable, suffix, prefix, rhetoric", gramNote:"Some/any, much/many, a few/a little, plenty of, enough"},
-  {id:22, voc:"Weather & Climate", gram:"Relative clauses", vocWords:"hurricane, blizzard, monsoon, drought, humidity, temperature, forecast, precipitation, tornado, heatwave, avalanche, fog, thunder, lightning, frost", gramNote:"Defining and non-defining relative clauses; who, which, that, whose, where"},
-  {id:23, voc:"Politics & Government", gram:"Participle clauses", vocWords:"parliament, democracy, election, policy, minister, legislation, treaty, constitution, referendum, candidate, opposition, coalition, sanction, veto, diplomat", gramNote:"Present and past participle clauses; reduced relative clauses"},
-  {id:24, voc:"Personality & Character", gram:"Wish & if only", vocWords:"optimistic, pessimistic, impulsive, decisive, sociable, introvert, extrovert, compassionate, determined, flexible, assertive, naive, sincere, tolerant, moody", gramNote:"Wish/if only + past simple (present); + past perfect (past); + would"},
-  {id:25, voc:"Living Abroad & Culture Shock", gram:"Mixed conditionals", vocWords:"culture shock, adapt, homesick, integrate, foreigner, immigration, diversity, tolerance, customs, etiquette, assimilate, nostalgia, fluent, residence, expat", gramNote:"Mixed conditionals (past condition, present result and vice versa)"},
-  {id:26, voc:"Fame & Celebrity", gram:"Emphasis – cleft sentences", vocWords:"celebrity, fame, publicity, stardom, reputation, recognition, endorsement, gossip, paparazzi, iconic, scandal, charisma, autograph, influence, tabloid", gramNote:"It is/was…that/who; What I like is…"},
-  {id:27, voc:"Relationships & Family", gram:"Noun clauses", vocWords:"marriage, divorce, sibling, relative, partner, affection, commitment, conflict, loyalty, reconcile, estranged, guardian, custody, heritage, bond", gramNote:"That-clauses; wh-clauses as subject/object"},
-  {id:28, voc:"Urban Life & Cities", gram:"Inversion", vocWords:"infrastructure, commute, pedestrian, skyscraper, suburb, traffic, congestion, architecture, metropolitan, renovation, gentrification, resident, borough, landmark, urban", gramNote:"Negative adverbials: Never have I…, Not only…but also, Rarely"},
-  {id:29, voc:"History & Heritage", gram:"Narrative tenses", vocWords:"ancient, civilisation, empire, dynasty, archaeology, heritage, monument, invasion, treaty, revolution, colonisation, era, reign, artefact, chronicle", gramNote:"Past simple, past continuous, past perfect in narrative"},
-  {id:30, voc:"Literature & Writing", gram:"Fronting & focus structures", vocWords:"novel, metaphor, narrator, prose, theme, imagery, symbolism, character, plot, genre, fiction, stanza, sonnet, dialogue, autobiography", gramNote:"Fronting with adverbials; subject-auxiliary inversion after fronting"},
-  {id:31, voc:"Global Issues", gram:"Concession & contrast", vocWords:"globalisation, poverty, refugee, conflict, epidemic, famine, inequality, sustainability, diplomacy, activism, humanitarian, treaty, sanction, migration, exploitation", gramNote:"Although, even though, despite, in spite of, however, nevertheless, whereas"},
-  {id:32, voc:"Cinema & Film", gram:"Purpose, reason & result", vocWords:"cinematography, screenplay, producer, sequel, blockbuster, genre, animation, subtitles, casting, premiere, documentary, thriller, screenplay, special effects, narrative", gramNote:"To/in order to/so as to; because/as/since; so…that, such…that, as a result"},
-  {id:33, voc:"Music & Sound", gram:"Comparison structures", vocWords:"melody, rhythm, harmony, orchestra, composer, lyrics, tempo, pitch, instrument, percussion, acoustic, chord, genre, vocals, conductor", gramNote:"As…as; the more…the more; twice as; similar to, different from"},
-  {id:34, voc:"Architecture & Design", gram:"Prefixes & suffixes (word formation)", vocWords:"aesthetic, symmetry, blueprint, facade, structure, proportion, interior, contemporary, minimal, sustainable, renovation, material, column, arch, spatial", gramNote:"Prefixes (un-, dis-, re-, over-) and suffixes (-tion, -ment, -ness, -ful, -less)"},
-  {id:35, voc:"Digital World & Internet", gram:"Compound nouns & collocations", vocWords:"algorithm, browser, interface, cybersecurity, database, bandwidth, streaming, platform, hacker, encryption, update, server, malware, notification, avatar", gramNote:"Common compound nouns; strong collocations with make, do, take, get"},
-  {id:36, voc:"Phrasal Verbs 1 (movement & change)", gram:"Phrasal verbs", vocWords:"set off, turn up, break down, give up, take off, put off, carry on, run out, look after, come across, go through, bring up, fall out, look forward to, end up", gramNote:"Transitive/intransitive phrasal verbs; separable vs inseparable"},
-  {id:37, voc:"Phrasal Verbs 2 (relationships & work)", gram:"Collocations & fixed phrases", vocWords:"get along, put up with, let down, look up to, fall for, make up, work out, deal with, hand in, take over, stand for, turn down, sort out, take on, keep up with", gramNote:"Verb + noun collocations; adjective + preposition; noun + noun collocations"},
-  {id:38, voc:"Academic Vocabulary", gram:"Formal writing structures", vocWords:"analyse, evaluate, hypothesis, criteria, interpret, justify, examine, significant, conclude, whereas, therefore, furthermore, despite, evidence, subsequent", gramNote:"Formal linking words; passive in academic writing; hedging language"},
-  {id:39, voc:"Idioms & Fixed Expressions", gram:"Idioms in context", vocWords:"break the ice, bite the bullet, hit the nail, under the weather, piece of cake, once in a blue moon, costs an arm and a leg, spill the beans, get cold feet, jump the gun, burn bridges, sit on the fence, see eye to eye, let the cat out, read between the lines", gramNote:"Understanding and using idiomatic expressions naturally"},
-  {id:40, voc:"Mixed Vocabulary Review A", gram:"Mixed Grammar Review 1", vocWords:"Review of key vocabulary from Units 1–20: collocations, synonyms, antonyms, topic-specific terms from people, travel, health, food, work, home, entertainment, nature, science, shopping", gramNote:"Review: tenses, modals, conditionals, passive, reported speech"},
-  {id:41, voc:"Mixed Vocabulary Review B", gram:"Mixed Grammar Review 2", vocWords:"Review of key vocabulary from Units 21–39: communication, crime, art, business, mind, language, weather, politics, personality, culture, fame, relationships, cities, history, literature", gramNote:"Review: relative clauses, gerunds/infinitives, articles, quantifiers, word formation, phrasal verbs"},
-  {id:42, voc:"Exam Practice & Strategies", gram:"Exam-style tasks", vocWords:"Full range of B1 vocabulary: paraphrase, synonym selection, context clues, collocations, phrasal verbs, idioms, academic terms, topic vocabulary from all units", gramNote:"All B1 grammar: error correction, sentence transformation, key word transformation, open cloze"},
+  {id:1,voc:"Free time",gram:"Present simple, present continuous",gramNote:"stative verbs",vocWords:"free time, hobby, sport, game, fan, player, team, win, lose, play, join, clean, collect"},
+  {id:2,voc:"Media and entertainment",gram:"Past simple, past continuous",gramNote:"when, while, as",vocWords:"media, news, program, channel, show, article, report, interview, journalist, comment"},
+  {id:3,voc:"People and relations",gram:"Present perfect simple, continuous",gramNote:"for, since, already, yet",vocWords:"friend, family, relation, parent, child, relative, partner, single, married, divorce, relationship"},
+  {id:4,voc:"Social issues",gram:"Past perfect simple, continuous",gramNote:"hardly, scarcely, barely",vocWords:"society, issue, problem, crime, police, law, prison, thief, steal, rob, judge, court, guilty"},
+  {id:5,voc:"Travel and transport",gram:"Future forms",gramNote:"will, be going to, present regular timetable",vocWords:"travel, transport, journey, trip, flight, train, bus, car, ticket, station, airport, passenger, driver, pilot"},
+  {id:6,voc:"Work and business",gram:"Passives",gramNote:"by, with, it is said that...",vocWords:"work, job, business, company, boss, manager, staff, employee, employer, salary, wages, earn, hire, fire"},
+  {id:7,voc:"Science and technology",gram:"Conditionals: zero, first, second",gramNote:"if, unless, provided that",vocWords:"science, technology, computer, internet, phone, machine, invention, discovery, scientist, engineer, develop"},
+  {id:8,voc:"Health and fitness",gram:"Conditionals: third",gramNote:"mixed conditionals",vocWords:"health, fitness, exercise, gym, sport, diet, food, doctor, nurse, hospital, medicine, illness, sick, hurt"},
+  {id:9,voc:"Education and learning",gram:"Wishes and regrets",gramNote:"if only, I wish",vocWords:"education, learning, school, class, teacher, student, book, lesson, exam, test, study, learn, teach, pass, fail"},
+  {id:10,voc:"Money and shopping",gram:"Reported speech",gramNote:"statements, questions, orders",vocWords:"money, shopping, buy, sell, shop, store, price, cost, pay, cash, card, cheap, expensive, spend, save"},
+  {id:11,voc:"Entertainment and art",gram:"Reported thoughts and requests",gramNote:"ask, tell, advise",vocWords:"entertainment, art, movie, music, song, singer, actor, artist, painting, theater, concert, play, perform"},
+  {id:12,voc:"The environment",gram:"Relative clauses",gramNote:"who, which, that, whose, where, when",vocWords:"environment, nature, planet, earth, world, animal, plant, tree, forest, river, sea, ocean, pollution, protect"},
+  {id:13,voc:"Food and drink",gram:"Non-defining relative clauses",gramNote:"comma rules",vocWords:"food, drink, meal, breakfast, lunch, dinner, cook, kitchen, restaurant, chef, menu, delicious, tasty, hungry, thirsty"},
+  {id:14,voc:"Hobbies and interests",gram:"Infinitive and -ing",vocWords:"interest, hobby, book, reading, writing, music, photography, camera, photo, picture, paint, draw, game"},
+  {id:15,voc:"Fashion and clothes",gram:"Verbs + infinitive / -ing with change in meaning",vocWords:"fashion, clothes, wear, shirt, pants, dress, shoes, hat, jacket, coat, stylish, trendy, look, shop"},
+  {id:16,voc:"The weather",gram:"Modal verbs: ability, permission, advice",vocWords:"weather, sun, rain, cloud, wind, snow, storm, hot, cold, warm, cool, sunny, rainy, cloudy, windy"},
+  {id:17,voc:"Sports and games",gram:"Modal verbs: obligation, necessity, prohibition",vocWords:"sport, game, football, tennis, basketball, swimming, running, jump, catch, throw, kick, ball, match, tournament"},
+  {id:18,voc:"Daily life",gram:"Modal verbs: probability, possibility, certainty",vocWords:"daily, life, day, morning, afternoon, evening, night, wake up, get up, breakfast, work, school, home, sleep"},
+  {id:19,voc:"Town and country",gram:"Articles: a, an, the, zero article",vocWords:"town, city, country, village, house, building, street, road, field, farm, nature, quiet, noisy, busy"},
+  {id:20,voc:"The body and health",gram:"Nouns: countable and uncountable, quantifiers",vocWords:"body, health, head, face, eye, ear, nose, mouth, arm, hand, leg, foot, heart, blood, feel, pain"},
+  {id:21,voc:"Communication",gram:"Pronouns and determiners",vocWords:"communication, speak, talk, say, tell, write, read, listen, hear, phone, call, message, email, letter"},
+  {id:22,voc:"Law and order",gram:"Adjectives and adverbs",vocWords:"law, order, police, crime, criminal, prison, jail, arrest, catch, stop, safe, dangerous, right, wrong"},
+  {id:23,voc:"Inventions and discoveries",gram:"Comparison: adjectives and adverbs",vocWords:"invention, discovery, invent, discover, new, old, modern, useful, useless, machine, idea, test, create"},
+  {id:24,voc:"People's character",gram:"Prepositions of time and place",vocWords:"character, personality, nice, kind, friendly, funny, smart, clever, lazy, hardworking, shy, confident"},
+  {id:25,voc:"Festivals and celebrations",gram:"Prepositions of direction and movement",vocWords:"festival, celebration, holiday, party, celebrate, enjoy, happy, fun, gift, present, food, music, dance"},
+  {id:26,voc:"The media",gram:"Phrasal verbs: intro",vocWords:"media, TV, radio, internet, newspaper, magazine, read, watch, listen, news, story, popular, information"},
+  {id:27,voc:"Buildings and structures",gram:"Phrasal verbs: advanced",vocWords:"building, structure, house, flat, apartment, room, wall, door, window, roof, floor, build, design"},
+  {id:28,voc:"The animal world",gram:"Prepositional phrases",vocWords:"animal, world, dog, cat, bird, fish, horse, cow, wild, pet, zoo, nature, live, feed, look after"},
+  {id:29,voc:"Purchasing and sales",gram:"Word formation: nouns",vocWords:"purchase, sale, buy, sell, shop, market, cost, price, money, customer, pay, choose, look for"},
+  {id:30,voc:"Transportation",gram:"Word formation: adjectives",vocWords:"transport, vehicle, car, train, bus, bike, plane, travel, ride, drive, fly, fast, slow, quick"},
+  {id:31,voc:"Modern living",gram:"Word formation: verbs",vocWords:"modern, living, life, city, house, apartment, technology, busy, fast, change, live, enjoy, work"},
+  {id:32,voc:"The arts",gram:"Word formation: adverbs",vocWords:"art, music, painting, drawing, theater, cinema, dance, book, artist, singer, writer, beautiful, great"},
+  {id:33,voc:"Physical appearance",gram:"Word patterns: verbs + prepositions",vocWords:"appearance, look, tall, short, thin, fat, beautiful, handsome, hair, eyes, face, young, old"},
+  {id:34,voc:"Emotions and feelings",gram:"Word patterns: adjectives + prepositions",vocWords:"emotion, feeling, happy, sad, angry, scared, surprised, excited, bored, tired, love, hate, feel"},
+  {id:35,voc:"Geographical features",gram:"Word patterns: nouns + prepositions",vocWords:"geography, mountain, hill, valley, river, lake, sea, ocean, island, forest, desert, map, country, land"},
+  {id:36,voc:"The legal system",gram:"Conjunctions: and, but, or, so, because",vocWords:"legal, system, law, court, judge, lawyer, police, crime, innocent, guilty, true, false"},
+  {id:37,voc:"The working world",gram:"Conjunctions: although, though, even though, in spite of, despite",vocWords:"work, job, office, factory, company, business, employee, manager, working, busy, hard"},
+  {id:38,voc:"The digital age",gram:"Connectors of time, sequence, contrast",vocWords:"digital, computer, internet, phone, smartphone, social media, online, app, game, use, type"},
+  {id:39,voc:"Crime and criminals",gram:"Inversion",vocWords:"crime, criminal, thief, robber, police, arrest, steal, rob, break into, dangerous, wrong"},
+  {id:40,voc:"The environment and pollution",gram:"Causatives: have/get something done",vocWords:"environment, pollution, dirty, clean, waste, plastic, recycling, air, water, green, save, protect"},
+  {id:41,voc:"Buying items",gram:"Subjunctive",vocWords:"buy, item, store, product, cost, price, money, pay, cash, credit card, receipt, return"},
+  {id:42,voc:"Human body",gram:"Advanced conditional structures",vocWords:"human, body, head, brain, heart, bones, muscle, skin, breathe, live, move, strong, healthy"}
 ];
 
-let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{},esubmit:false,pd:null,pans:{},psubmit:false,pact:null,loading:false,err:null};
+let S = { uid: null, tab: 'quiz', qld: false, qi: 0, qsel: null, qd: null, eld: false, ed: null, eans: {}, esubmit: false, pld: false, pd: null, pans: {}, pact: null, psubmit: false };
 
+// Đọc API Key từ bộ nhớ khi tải trang
+document.addEventListener("DOMContentLoaded", () => {
+  const savedKey = localStorage.getItem('gemini_key');
+  if (savedKey) {
+    document.getElementById('apiKeyInput').value = savedKey;
+  }
+  renderUList();
+  renderMain();
+});
+
+function saveKey() {
+  const val = document.getElementById('apiKeyInput').value.trim();
+  if (val.startsWith("AIzaSy")) {
+    localStorage.setItem('gemini_key', val);
+    alert("✅ Đã lưu API Key thành công!");
+    renderMain();
+  } else {
+    alert("❌ Key không đúng định dạng của Gemini (phải bắt đầu bằng AIzaSy)");
+  }
+}
+
+// Hàm kết nối API Gemini lõi
 async function api(promptText) {
-  // 1. Lấy key từ trình duyệt ra kiểm tra
-  let KEY = localStorage.getItem('gemini_key');
-
-  // 2. Nếu chưa có Key hoặc Key nhập sai định dạng (không bắt đầu bằng AIzaSy)
-  if (!KEY || !KEY.trim().startsWith("AIzaSy")) {
-    // Xóa key lỗi cũ trong bộ nhớ (nếu có)
-    localStorage.removeItem('gemini_key');
-    
-    // Hiện ô bắt buộc nhập
-    let inputKey = prompt("⚠️ HỆ THỐNG CẦN API KEY ĐỂ HOẠT ĐỘNG:\nVui lòng dán Gemini API Key của bạn vào đây (Key chuẩn bắt đầu bằng 'AIzaSy'):");
-    
-    if (inputKey && inputKey.trim().startsWith("AIzaSy")) {
-      KEY = inputKey.trim();
-      localStorage.setItem('gemini_key', KEY);
-    } else {
-      alert("❌ API Key không hợp lệ hoặc bạn đã hủy nhập!\nỨng dụng không thể tạo câu hỏi nếu thiếu Key.");
-      return null;
-    }
+  const KEY = localStorage.getItem('gemini_key');
+  if (!KEY) {
+    alert("⚠️ Vui lòng nhập và lưu Gemini API Key trước khi tạo câu hỏi!");
+    return null;
   }
 
-  // URL kết nối chuẩn phiên bản v1beta
   const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${KEY}`;
 
   try {
@@ -184,263 +205,201 @@ async function api(promptText) {
     });
 
     const data = await response.json();
-
     if (!response.ok) {
-      // Nếu Key bị Google từ chối (403/401), xóa luôn để lần sau tải lại trang sẽ hiện ô nhập mới
       if (response.status === 403 || response.status === 401) {
         localStorage.removeItem('gemini_key');
-        throw new Error("API Key của bạn đã bị Google khóa hoặc sai. Hãy tải lại trang (F5) để nhập Key mới!");
+        throw new Error("API Key sai hoặc đã bị Google vô hiệu hóa. Hãy lấy key mới và lưu lại.");
       }
-      throw new Error(data.error?.message || "Lỗi kết nối hệ thống");
+      throw new Error(data.error?.message || "Lỗi kết nối");
     }
 
     const resultText = data.candidates[0].content.parts[0].text;
     const cleanedJson = resultText.replace(/```json\n?/g, '').replace(/```/g, '').trim();
     return JSON.parse(cleanedJson);
   } catch (error) {
-    console.error("Lỗi hệ thống:", error);
+    console.error("Lỗi:", error);
     alert("⚠️ " + error.message);
-    throw error;
+    return null;
   }
+}
 
 async function genQuiz(u) {
-  return api(`Bạn là giáo viên tiếng Anh. Tạo 10 câu hỏi quiz từ vựng cho Unit "${u.id}: ${u.voc}" sách Destination B1.
-Dùng các từ này: ${u.vocWords}
-Câu hỏi đa dạng: nghĩa tiếng Việt của từ tiếng Anh, hoặc ngược lại, hoặc điền từ vào câu ví dụ.
-Mỗi câu: 4 đáp án (1 đúng, 3 sai nhưng liên quan chủ đề).
-Chỉ trả về JSON, không thêm gì:
-{"questions":[{"question":"Từ 'confident' có nghĩa tiếng Việt là gì?","options":["tự tin","nhút nhát","hào phóng","tức giận"],"correct":0,"explanation":"'Confident' = tự tin. Ví dụ: She spoke in a confident voice."}]}`);
+  return api(`Bạn là chuyên gia giáo trình Destination B1. Hãy tạo 5 câu hỏi trắc nghiệm từ vựng cực hay cho Unit ${u.id}: ${u.voc}. YÊU CẦU BẮT BUỘC: Chỉ sử dụng các từ vựng xuất hiện trong danh sách sau: ${u.vocWords}. Trả về cấu trúc JSON chính xác không chứa kí tự markdown bên ngoài: {"questions":[{"question":"...","options":["...","...","...","..."],"correct":0,"explanation":"..."}]}`);
 }
 
 async function genExam(u) {
-  return api(`Bạn là giáo viên tiếng Anh. Tạo 6 câu hỏi kiểm tra ngữ pháp và từ vựng cho Unit "${u.id}" sách Destination B1.
-Chủ đề từ vựng: ${u.voc}. Ngữ pháp: ${u.gram}.
-Câu hỏi về: dùng đúng thì, chọn từ đúng, cấu trúc câu đúng.
-Từ vựng dùng: ${u.vocWords.split(',').slice(0,8).join(',')}
-Chỉ trả về JSON:
-{"questions":[{"question":"She _____ confident during the interview.","options":["was","is being","has been","had been"],"correct":0,"explanation":"Dùng 'was' (quá khứ đơn) vì diễn tả trạng thái trong quá khứ."}]}`);
+  return api(`Tạo đề thi tổng hợp 6 câu cho Unit ${u.id}. Từ vựng bám sát: ${u.vocWords}. Ngữ pháp bám sát: ${u.gram} (${u.gramNote || ''}). Trả về cấu trúc JSON chuẩn: {"questions":[{"question":"...","options":["...","...","...","..."],"correct":0,"explanation":"..."}]}`);
 }
 
 async function genPassage(u) {
-  return api(`Bạn là giáo viên tiếng Anh. Tạo bài đọc điền từ cho Unit "${u.id}: ${u.voc}" sách Destination B1.
-Dùng các từ này làm từ cần điền (chọn 7): ${u.vocWords}
-Đoạn văn tiếng Anh 100-130 từ về chủ đề "${u.voc}", có 7 chỗ trống [BLANK_1] đến [BLANK_7].
-Ngân hàng từ gồm 10 từ (7 đúng + 3 nhiễu liên quan chủ đề).
-Chỉ trả về JSON:
-{"passage":"Every year many people choose to [BLANK_1]...","blanks":["travel","destination","journey","experience","culture","explore","luggage","flight","hotel","adventure"],"answers":{"BLANK_1":"travel","BLANK_2":"destination","BLANK_3":"journey","BLANK_4":"experience","BLANK_5":"culture","BLANK_6":"explore","BLANK_7":"luggage"},"translation":"Hàng năm nhiều người chọn đi du lịch..."}`);
+  return api(`Tạo bài đọc đục lỗ 7 chỗ trống cho Unit ${u.id}, chủ đề ${u.voc}. Các chỗ trống từ [BLANK_1] đến [BLANK_7] phải tương ứng với các từ khóa chuẩn trong list này: ${u.vocWords}. Trả về cấu trúc JSON chuẩn: {"passage":"... [BLANK_1] ...","blanks":["BLANK_1","BLANK_2","BLANK_3","BLANK_4","BLANK_5","BLANK_6","BLANK_7"],"answers":{"BLANK_1":"từ_đúng_1"},"words":["từ_đúng_1","từ_nhiễu_1"...],"translation":"..."}`);
 }
 
-function set(u){Object.assign(S,u);render()}
+function set(obj) { S = { ...S, ...obj }; renderMain(); renderUList(); }
 
-function render(){document.getElementById('root').innerHTML=S.view==='home'?home():unit();attach()}
-
-function home(){
-  return `
-  <div class="hdr">
-    <div class="hdr-icon">📚</div>
-    <div>
-      <h1>Destination B1 — Grammar & Vocabulary</h1>
-      <p>42 units • Quiz từ vựng • Bài thi • Đoạn văn điền từ</p>
-    </div>
-  </div>
-  <div class="stitle">Chọn unit để bắt đầu luyện tập</div>
-  <div class="grid">
-  ${UNITS.map(u=>`<div class="ucard" data-uid="${u.id}">
-    <div class="unum">Unit ${u.id}</div>
-    <div class="uvoc">📖 ${u.voc}</div>
-    <div class="ugram">📐 ${u.gram}</div>
-  </div>`).join('')}
-  </div>`;
+function renderUList() {
+  const el = document.getElementById("ulist");
+  let h = `<div class="lst-h">Danh sách bài học (B1)</div>`;
+  UNITS.forEach(u => {
+    h += `
+      <div class="uitem ${S.uid===u.id?'act':''}" onclick="set({uid:${u.id},qld:false,qd:null,qsel:null,qi:0,eld:false,ed:null,eans:{},esubmit:false,pld:false,pd:null,pans:{},pact:null,psubmit:false})">
+        <div class="uitem-id">${u.id}</div>
+        <div class="uitem-body">
+          <div class="uitem-t">${u.voc}</div>
+          <div class="uitem-g">${u.gram}</div>
+        </div>
+      </div>`;
+  });
+  el.innerHTML = h;
 }
 
-function unit(){
-  const u=UNITS[S.uid-1];
-  let body='';
-  if(S.loading) body=`<div class="ld"><div class="spin"></div><p>AI đang tạo nội dung cho Unit ${u.id}...</p></div>`;
-  else if(S.err) body=`<div class="err">⚠️ ${S.err}<button class="rbtn" id="rbtn">Thử lại</button></div>`;
-  else if(S.feat==='quiz') body=quiz(u);
-  else if(S.feat==='exam') body=exam(u);
-  else body=passage(u);
-  return `<div class="uv">
-  <div class="uhdr">
-    <button class="bbtn" id="bbtn">← Tất cả units</button>
-    <div class="uinfo">
+function renderMain() {
+  const el = document.getElementById("view");
+  if (!S.uid) {
+    el.innerHTML = `<div class="welcome"><h2>Destination B1 Quest Master</h2><p>Chọn một bài học bên cột trái để bắt đầu tạo thử thách</p></div>`;
+    return;
+  }
+  const u = UNITS.find(x => x.id === S.uid);
+  let h = `
+    <div class="uhead">
       <h2>Unit ${u.id}: ${u.voc}</h2>
-      <div class="voc-sub">📖 Từ vựng: ${u.voc}</div>
-      <div class="gram-sub">📐 Ngữ pháp: ${u.gram}</div>
+      <p><b>Ngữ pháp:</b> ${u.gram} ${u.gramNote?`(${u.gramNote})`:''}</p>
     </div>
-  </div>
-  <div class="ftabs">
-    <div class="ftab ${S.feat==='quiz'?'on':''}" data-f="quiz"><span class="ficon">🧠</span>Quiz từ vựng</div>
-    <div class="ftab ${S.feat==='exam'?'on':''}" data-f="exam"><span class="ficon">📝</span>Bài thi</div>
-    <div class="ftab ${S.feat==='passage'?'on':''}" data-f="passage"><span class="ficon">📄</span>Đoạn văn điền từ</div>
-  </div>
-  ${body}</div>`;
-}
+    <div class="utabs">
+      <div class="utab ${S.tab==='quiz'?'act':''}" onclick="set({tab:'quiz'})">Vocabulary Quiz</div>
+      <div class="utab ${S.tab==='exam'?'act':''}" onclick="set({tab:'exam'})">Unit Exam</div>
+      <div class="utab ${S.tab==='passage'?'act':''}" onclick="set({tab:'passage'})">Reading Cloze</div>
+    </div>
+  `;
 
-function quiz(u){
-  if(!S.qd) return `<div class="empty-state">
-    <div class="es-icon">🧠</div>
-    <h3>Quiz từ vựng — Unit ${u.id}</h3>
-    <p>5 câu hỏi về từ vựng chủ đề <strong>${u.voc}</strong><br>Đa dạng: nghĩa tiếng Việt, đoán từ, điền vào câu</p>
-    <button class="gbtn" id="gq">✨ Tạo câu hỏi Quiz ngay</button>
-  </div>`;
-  const q=S.qd.questions[S.qi],tot=S.qd.questions.length,L=['A','B','C','D'];
-  let h=`<div class="qct">Câu ${S.qi+1}/${tot}</div>
-  <div class="qq" style="margin-top:10px">${q.question}</div>
-  <div class="opts">`;
-  q.options.forEach((o,i)=>{
-    let c='opt';
-    if(S.qsel!==null){c+=' dis';if(i===q.correct)c+=' ok';else if(i===S.qsel&&i!==q.correct)c+=' ng';}
-    h+=`<div class="${c}" data-o="${i}"><div class="olet">${L[i]}</div><span>${o}</span></div>`;
-  });
-  h+=`</div>`;
-  if(S.qsel!==null) h+=`<div class="expl">💡 <strong>Giải thích:</strong> ${q.explanation}</div>`;
-  h+=`<div class="qnav">
-    <button class="nbtn" id="pq" ${S.qi===0?'disabled':''}>← Trước</button>
-    <span class="qct">${S.qsel===null?'Chọn đáp án của bạn':'✓ Đã trả lời'}</span>
-    <button class="nbtn" id="nq" ${S.qi>=tot-1?'disabled':''}>Tiếp →</button>
-  </div>`;
-  if(S.qi===tot-1&&S.qsel!==null) h+=`<button class="gbtn" id="gq" style="margin-top:12px">🔄 Tạo quiz mới</button>`;
-  return h;
-}
-
-function exam(u){
-  if(!S.ed) return `<div class="empty-state">
-    <div class="es-icon">📝</div>
-    <h3>Bài thi — Unit ${u.id}</h3>
-    <p>6 câu hỏi kết hợp từ vựng <strong>${u.voc}</strong><br>và ngữ pháp <strong>${u.gram}</strong></p>
-    <button class="gbtn" id="ge">✨ Tạo bài thi ngay</button>
-  </div>`;
-  const L=['A','B','C','D'];let h='';
-  if(S.esubmit){
-    const ok=S.ed.questions.filter((q,i)=>S.eans[i]===q.correct).length,tot=S.ed.questions.length,pct=Math.round(ok/tot*100);
-    h+=`<div class="sc"><div class="sb">${ok}/${tot}</div><div class="sl2">${pct}% — ${pct>=80?'Xuất sắc! 🎉':pct>=60?'Khá tốt! 👍':'Cần luyện thêm 💪'}</div></div>`;
+  if (S.tab === 'quiz') {
+    if (!S.qld && !S.qd) {
+      h += `<div class="action-zone"><button class="btn" onclick="triggerGen('quiz')">✨ Tạo câu hỏi Quiz ngay</button></div>`;
+    } else if (S.qld) {
+      h += `<div class="action-zone"><div class="loading"><div class="spinner"></div><span>AI đang soạn thảo câu hỏi từ vựng B1...</span></div></div>`;
+    } else if (S.qd) {
+      const q = S.qd.questions[S.qi];
+      h += `
+        <div class="qbox">
+          <div class="qtext">Câu hỏi ${S.qi+1}/5: ${q.question}</div>
+          <div class="opts">
+            ${q.options.map((o,i)=>{
+              let cl = '';
+              if(S.qsel!==null){
+                if(i===q.correct) cl='ok';
+                else if(S.qsel===i) cl='err';
+              } else if(S.qsel===i) cl='sel';
+              return `<div class="opt ${cl}" data-o="${i}">${o}</div>`;
+            }).join('')}
+          </div>
+          ${S.qsel!==null?`<div class="expl">💡 <b>Giải thích:</b> ${q.explanation}</div>`:''}
+        </div>
+        <div class="qnav">
+          <button class="btn btn-s" id="pq" ${S.qi===0?'disabled':''}>Câu trước</button>
+          <button class="btn btn-s" id="nq" ${S.qi===4?'disabled':''}>Câu tiếp theo</button>
+        </div>
+      `;
+    }
+  } else if (S.tab === 'exam') {
+    if (!S.eld && !S.ed) {
+      h += `<div class="action-zone"><button class="btn" onclick="triggerGen('exam')">📝 Tạo đề thi tổng hợp</button></div>`;
+    } else if (S.eld) {
+      h += `<div class="action-zone"><div class="loading"><div class="spinner"></div><span>AI đang lập đề thi ngữ pháp và từ vựng...</span></div></div>`;
+    } else if (S.ed) {
+      if (S.esubmit) {
+        const ok = S.ed.questions.filter((q,i)=>S.eans[i]===q.correct).length;
+        h += `<div class="sc"><div class="sb">KẾT QUẢ</div><div class="sl2">Bạn đạt ${ok}/${S.ed.questions.length} câu đúng</div></div>`;
+      }
+      S.ed.questions.forEach((q,qi) => {
+        h += `
+          <div class="qbox" style="border-bottom:1px solid var(--bd);padding-bottom:16px">
+            <div class="qtext">${qi+1}. ${q.question}</div>
+            <div class="opts">
+              ${q.options.map((o,oi)=>{
+                let cl = '';
+                if(S.esubmit){
+                  if(oi===q.correct) cl='ok';
+                  else if(S.eans[qi]===oi) cl='err';
+                } else if(S.eans[qi]===oi) cl='sel';
+                return `<div class="opt ${cl}" data-qi="${qi}" data-oi="${oi}">${o}</div>`;
+              }).join('')}
+            </div>
+            ${S.esubmit?`<div class="expl">💡 ${q.explanation}</div>`:''}
+          </div>`;
+      });
+      if (!S.esubmit) h += `<div style="text-align:center;margin-top:20px"><button class="btn" id="esub">Nộp bài chấm điểm</button></div>`;
+    }
+  } else if (S.tab === 'passage') {
+    if (!S.pld && !S.pd) {
+      h += `<div class="action-zone"><button class="btn" onclick="triggerGen('passage')">📖 Tạo bài đọc đục lỗ</button></div>`;
+    } else if (S.pld) {
+      h += `<div class="action-zone"><div class="loading"><div class="spinner"></div><span>AI đang viết bài đọc ngữ cảnh...</span></div></div>`;
+    } else if (S.pd) {
+      if (S.psubmit) {
+        let ok = 0;
+        Object.keys(S.pd.answers).forEach(b => { if(S.pans[b]===S.pd.answers[b]) ok++; });
+        h += `<div class="sc"><div class="sb">HOÀN THÀNH</div><div>Đúng ${ok}/${S.pd.blanks.length} từ vựng</div></div>`;
+      }
+      let pt = S.pd.passage;
+      S.pd.blanks.forEach(b => {
+        let val = S.pans[b] || '...';
+        let cl = S.pact === b ? 'act' : '';
+        if(S.psubmit) cl += S.pans[b] === S.pd.answers[b] ? ' filled' : ' err';
+        pt = pt.replace(`[${b}]`, `<span class="blk ${cl}" data-b="${b}">${val}</span>`);
+      });
+      h += `
+        <div class="ptext">${pt}</div>
+        <div class="lst-h" style="padding:0;margin-bottom:10px">Ngân hàng từ vựng gợi ý (Bấm chọn chỗ trống trước rồi chọn từ):</div>
+        <div class="wlist">
+          ${S.pd.words.map(w => {
+            const used = Object.values(S.pans).includes(w);
+            return `<div class="wchip ${used?'used':''}" data-w="${w}">${w}</div>`;
+          }).join('')}
+        </div>
+      `;
+      if (S.psubmit) h += `<div class="expl" style="margin-bottom:20px">🌐 <b>Bản dịch bài đọc:</b><br>${S.pd.translation}</div>`;
+      else h += `<div style="text-align:center"><button class="btn" id="psub">Nộp bài đọc</button></div>`;
+    }
   }
-  S.ed.questions.forEach((q,qi)=>{
-    h+=`<div class="eq"><div class="eqn">Câu ${qi+1}</div><div class="eqt">${q.question}</div>`;
-    q.options.forEach((o,oi)=>{
-      let c='eo';
-      if(S.eans[qi]===oi)c+=' sel';
-      if(S.esubmit){c+=' dis';if(oi===q.correct)c+=' ok';else if(S.eans[qi]===oi)c+=' ng';}
-      h+=`<div class="${c}" data-qi="${qi}" data-oi="${oi}">${L[oi]}. ${o}</div>`;
-    });
-    if(S.esubmit) h+=`<div class="expl" style="margin-top:9px">💡 ${q.explanation}</div>`;
-    h+=`</div>`;
-  });
-  if(!S.esubmit){
-    const a=Object.keys(S.eans).length,tot=S.ed.questions.length;
-    h+=`<button class="esub" id="esub" ${a<tot?'disabled':''}>Nộp bài (${a}/${tot} câu đã trả lời)</button>`;
-  } else {
-    h+=`<button class="gbtn" id="ge" style="margin-top:12px">🔄 Tạo bài thi mới</button>`;
-  }
-  return h;
+  el.innerHTML = h;
+  attachEvents();
 }
 
-function passage(u){
-  if(!S.pd) return `<div class="empty-state">
-    <div class="es-icon">📄</div>
-    <h3>Đoạn văn điền từ — Unit ${u.id}</h3>
-    <p>Đọc đoạn văn về chủ đề <strong>${u.voc}</strong><br>và điền từ thích hợp vào chỗ trống</p>
-    <button class="gbtn" id="gp">✨ Tạo đoạn văn ngay</button>
-  </div>`;
-  const d=S.pd,bkeys=Object.keys(d.answers);
-  let ptxt=d.passage;
-  bkeys.forEach(bk=>{
-    const f=S.pans[bk];
-    let c='blk';
-    if(S.psubmit) c+=f===d.answers[bk]?' ok2':' ng2';
-    else if(S.pact===bk) c+=' act';
-    ptxt=ptxt.replace('['+bk+']',`<span class="${c}" data-b="${bk}">${f||'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}</span>`);
-  });
-  let h='';
-  if(S.pact&&!S.psubmit) h+=`<div class="hint">✏️ Đang điền vào <strong>${S.pact}</strong> — nhấn chọn từ bên dưới</div>`;
-  h+=`<div class="pbox">${ptxt}</div>`;
-  h+=`<div class="stitle">Ngân hàng từ (chọn từ để điền)</div><div class="wbank">`;
-  d.blanks.forEach(w=>{
-    const used=Object.values(S.pans).includes(w);
-    const issel=S.pact&&S.pans[S.pact]===w;
-    h+=`<div class="wchip ${issel?'sel':used&&!issel?'used':''}" data-w="${w}">${w}</div>`;
-  });
-  h+=`</div>`;
-  if(!S.psubmit){
-    const f=Object.keys(S.pans).length,tot=bkeys.length;
-    h+=`<button class="psub" id="psub" ${f<tot?'style="opacity:.55;cursor:not-allowed"':''}>✓ Kiểm tra đáp án (${f}/${tot})</button>`;
-  } else {
-    const ok=bkeys.filter(b=>S.pans[b]===d.answers[b]).length;
-    h+=`<div class="sc" style="margin-top:14px"><div class="sb">${ok}/${bkeys.length}</div><div class="sl2">Điền đúng ${ok} từ trong tổng số ${bkeys.length}</div></div>`;
-    h+=`<div class="ans-sec"><h4>Đáp án đúng</h4><div>`;
-    bkeys.forEach(b=>{
-      const ok2=S.pans[b]===d.answers[b];
-      h+=`<div class="ai"><span>${ok2?'✅':'❌'}</span><span><strong>${b}:</strong> ${d.answers[b]}${!ok2&&S.pans[b]?' (bạn điền: '+S.pans[b]+')':''}</span></div>`;
-    });
-    h+=`</div></div>`;
-    if(d.translation) h+=`<div style="margin-top:12px;padding:13px;background:var(--sur2);border-radius:var(--r);border:2px solid var(--bd)"><div class="stitle">Dịch nghĩa đoạn văn</div><p style="font-size:13px;line-height:1.7;color:var(--t2)">${d.translation}</p></div>`;
-    h+=`<button class="gbtn" id="gp" style="margin-top:12px">🔄 Tạo đoạn văn mới</button>`;
-  }
-  return h;
+async function triggerGen(type) {
+  const u = UNITS.find(x => x.id === S.uid);
+  if (type === 'quiz') { set({qld:true}); const d=await genQuiz(u); set({qld:false,qd:d}); }
+  else if (type === 'exam') { set({eld:true}); const d=await genExam(u); set({eld:false,ed:d}); }
+  else if (type === 'passage') { set({pld:true}); const d=await genPassage(u); set({pld:false,pd:d}); }
 }
 
-function attach(){
-  document.querySelectorAll('.ucard[data-uid]').forEach(el=>el.addEventListener('click',()=>
-    set({view:'unit',uid:+el.dataset.uid,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{},esubmit:false,pd:null,pans:{},psubmit:false,pact:null,loading:false,err:null})));
-  const bb=document.getElementById('bbtn');if(bb)bb.addEventListener('click',()=>set({view:'home'}));
-  document.querySelectorAll('.ftab[data-f]').forEach(el=>el.addEventListener('click',()=>
-    set({feat:el.dataset.f,qsel:null,esubmit:false,psubmit:false,pact:null,err:null})));
-  const rb=document.getElementById('rbtn');if(rb)rb.addEventListener('click',()=>set({err:null}));
-
-  const gq=document.getElementById('gq');
-  if(gq)gq.addEventListener('click',async()=>{
-    const u=UNITS[S.uid-1];set({loading:true,err:null,qd:null,qi:0,qsel:null});
-    try{const d=await genQuiz(u);set({loading:false,qd:d});}
-    catch(e){set({loading:false,err:e.message});}
-  });
-  const ge=document.getElementById('ge');
-  if(ge)ge.addEventListener('click',async()=>{
-    const u=UNITS[S.uid-1];set({loading:true,err:null,ed:null,eans:{},esubmit:false});
-    try{const d=await genExam(u);set({loading:false,ed:d});}
-    catch(e){set({loading:false,err:e.message});}
-  });
-  const gp=document.getElementById('gp');
-  if(gp)gp.addEventListener('click',async()=>{
-    const u=UNITS[S.uid-1];set({loading:true,err:null,pd:null,pans:{},psubmit:false,pact:null});
-    try{const d=await genPassage(u);set({loading:false,pd:d});}
-    catch(e){set({loading:false,err:e.message});}
-  });
-
-  document.querySelectorAll('.opt[data-o]').forEach(el=>el.addEventListener('click',()=>{
-    if(S.qsel!==null)return;set({qsel:+el.dataset.o});
+function attachEvents() {
+  document.querySelectorAll('.opt[data-o]').forEach(el => el.addEventListener('click', () => {
+    if (S.qsel !== null) return;
+    set({qsel: +el.dataset.o});
   }));
-  const pq=document.getElementById('pq');if(pq)pq.addEventListener('click',()=>set({qi:S.qi-1,qsel:null}));
-  const nq=document.getElementById('nq');if(nq)nq.addEventListener('click',()=>set({qi:S.qi+1,qsel:null}));
+  const pq = document.getElementById('pq'); if (pq) pq.addEventListener('click', () => set({qi: S.qi - 1, qsel: null}));
+  const nq = document.getElementById('nq'); if (nq) nq.addEventListener('click', () => set({qi: S.qi + 1, qsel: null}));
 
-  document.querySelectorAll('.eo[data-qi]').forEach(el=>el.addEventListener('click',()=>{
-    if(S.esubmit)return;set({eans:{...S.eans,[+el.dataset.qi]:+el.dataset.oi}});
+  document.querySelectorAll('.eo[data-qi]').forEach(el => el.addEventListener('click', () => {
+    if (S.esubmit) return;
+    set({eans: {...S.eans, [+el.dataset.qi]: +el.dataset.oi}});
   }));
-  const es=document.getElementById('esub');
-  if(es)es.addEventListener('click',()=>{
-    if(Object.keys(S.eans).length>=S.ed.questions.length)set({esubmit:true});
-  });
+  const es = document.getElementById('esub');
+  if (es) es.addEventListener('click', () => { if (Object.keys(S.eans).length >= S.ed.questions.length) set({esubmit: true}); });
 
-  document.querySelectorAll('.blk[data-b]').forEach(el=>el.addEventListener('click',()=>{
-    if(S.psubmit)return;set({pact:el.dataset.b});
+  document.querySelectorAll('.blk[data-b]').forEach(el => el.addEventListener('click', () => {
+    if (S.psubmit) return;
+    set({pact: el.dataset.b});
   }));
-  document.querySelectorAll('.wchip[data-w]').forEach(el=>el.addEventListener('click',()=>{
-    if(S.psubmit||!S.pact)return;
-    const w=el.dataset.w,used=Object.values(S.pans).includes(w),cur=S.pans[S.pact];
-    if(used&&cur!==w)return;
-    const na={...S.pans};
-    if(cur===w){delete na[S.pact];}
-    else{const ob=Object.keys(na).find(k=>na[k]===w);if(ob)delete na[ob];na[S.pact]=w;}
-    set({pans:na,pact:null});
+  document.querySelectorAll('.wchip[data-w]').forEach(el => el.addEventListener('click', () => {
+    if (S.psubmit || !S.pact) return;
+    const w = el.dataset.w, used = Object.values(S.pans).includes(w), cur = S.pans[S.pact];
+    if (used && cur !== w) return;
+    set({pans: {...S.pans, [S.pact]: w}});
   }));
-  const ps=document.getElementById('psub');
-  if(ps)ps.addEventListener('click',()=>{
-    if(Object.keys(S.pans).length>=Object.keys(S.pd.answers).length)set({psubmit:true});
-  });
+  const ps = document.getElementById('psub');
+  if (ps) ps.addEventListener('click', () => set({psubmit: true}));
 }
-
-render();
 </script>
 </body>
 </html>
