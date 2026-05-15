@@ -152,27 +152,35 @@ let S = {view:'home',uid:null,feat:'quiz',qd:null,qi:0,qsel:null,ed:null,eans:{}
 
 async function api(prompt) {
   const GEMINI_API_KEY = "AIzaSyAZSKVOHYrEQDhVXiaFvMU6mnbIkUIAWzU";
-  // Sử dụng v1 để ổn định nhất, hoặc v1beta với cấu trúc đường dẫn mới
+  // Sửa 1: Chuyển sang v1 để ổn định và tìm thấy model
   const URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
   
   try {
     const response = await fetch(URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      // Sửa 2: Đảm bảo cấu trúc body đúng chuẩn Google AI
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
+        contents: [{
+          parts: [{ text: prompt }]
+        }]
       })
     });
 
     const data = await response.json();
+
     if (!response.ok) {
-        // Log chi tiết lỗi để bạn dễ debug
-        console.error("Chi tiết lỗi từ Google:", data);
-        throw new Error(data.error?.message || 'Lỗi kết nối API');
+      console.error("Chi tiết lỗi:", data);
+      throw new Error(data.error?.message || 'Lỗi kết nối API');
+    }
+
+    // Sửa 3: Kiểm tra dữ liệu trả về trước khi xử lý
+    if (!data.candidates || !data.candidates[0].content) {
+      throw new Error("AI không trả về nội dung hợp lệ.");
     }
 
     const resultText = data.candidates[0].content.parts[0].text;
-    // Làm sạch Markdown nếu AI trả về code block ```json
+    // Làm sạch Markdown JSON
     const cleanedJson = resultText.replace(/```json\n?/g, '').replace(/```/g, '').trim();
     return JSON.parse(cleanedJson);
   } catch (error) {
